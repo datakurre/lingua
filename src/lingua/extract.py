@@ -23,6 +23,13 @@ from lingua.extractors import EXTRACTORS
 from lingua.extractors import EXTENSIONS
 from lingua import lingua_version
 
+try:
+    from lingua.extractors.jinja2 import register_jinja2_plugin
+except ImportError:
+    def register_jinja2_plugin():
+        pass
+
+
 
 def po_timestamp():
     local = time.localtime()
@@ -306,6 +313,7 @@ def main():
     options = parser.parse_args()
     register_extractors()
     register_babel_plugins()
+    register_jinja2_plugin()
 
     if options.list_extractors:
         for extractor in sorted(EXTRACTORS):
