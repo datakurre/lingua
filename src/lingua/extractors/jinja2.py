@@ -13,6 +13,7 @@ from jinja2.utils import import_string
 from . import EXTRACTORS
 from . import EXTENSIONS
 from . import Extractor
+from . import Keyword
 from . import Message
 from . import update_keywords
 from .python import KEYWORDS
@@ -61,6 +62,7 @@ class Jinja2Extractor(Extractor):
 
     def __call__(self, filename, options, fileobj=None, firstline=0):
         self.keywords = KEYWORDS.copy()
+        self.keywords['_'] = Keyword('_')
         update_keywords(self.keywords, options.keywords)
 
         extensions = set()
