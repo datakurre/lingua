@@ -53,7 +53,8 @@ def extract_from_ast(node, gettext_functions=GETTEXT_FUNCTIONS):
                     isinstance(arg.value.value, string_types):
                 default = arg.value.value
 
-        yield node.lineno, msgid, default
+        if msgid:
+            yield node.lineno, msgid, default
 
 
 class Jinja2Extractor(Extractor):
